@@ -5,7 +5,6 @@ import yaml
 import json
 
 app = Flask(__name__)
-app.debug = True
 
 # load the keys.yaml file and convert to a JSON
 with open("./config/keys.yaml", 'r') as yaml_in, open("keys.json", "w") as json_out:
