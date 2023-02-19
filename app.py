@@ -54,8 +54,8 @@ def balance():
 
 
 # endpoint for placing trades
-@app.route('/webhook', methods=['POST'])
-def respond():
+@app.route('/order', methods=['POST'])
+def order():
     # The JSON sent to the endpoint should look like this:
 
     # {
