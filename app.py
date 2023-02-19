@@ -63,6 +63,7 @@ def respond():
     # "percent_stake" : 0.1, // 0.1% of portfolio value staked
     # "stop_loss" : 0.5, // 0.5% stop loss
     # "take_profit" : 1, // 1% profit target
+    # "leverage" : 50, // the amount of leverage available to your account
     # }
 
     # Parse JSON key:values into variables
@@ -71,6 +72,7 @@ def respond():
     percent_stake = float(letter.get('percent_stake', '')) / 100
     stop_loss = float(letter.get('stop_loss', '')) / 100
     take_profit = float(letter.get('take_profit', '')) / 100
+    leverage = int(letter.get('leverage', ''))
 
     # request last price of asset
     last = ad.fetch(instrument=symbol, granularity="15s", count=2)['Close'].values[0]
@@ -84,7 +86,7 @@ def respond():
 
     # calculate the maximum number of contracts affordable
     # Note: perhaps use bal
-    max_size = (NAV * 50) / last
+    max_size = (NAV * leverage) / last
     # calculate the number of contracts to buy
     size = max_size * percent_stake
     # place the order with the variables as parameters
